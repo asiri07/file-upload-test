@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import 'antd/dist/antd.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/css/perfundo.with-icons.css';
+import './assets/css/styles.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
