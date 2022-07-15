@@ -5,7 +5,7 @@ import * as Constants from '../constants';
 const postSignIn = async (req) => {
     return await axios({
         method: `post`,
-        url: `${Constants.API_URL}/users/signin`,
+        url: `${Constants.API_URL}/api/user/signin`,
         data: req
     });
 }
@@ -13,7 +13,7 @@ const postSignIn = async (req) => {
 const postSignUp = async (req) => {
     return await axios({
         method: `post`,
-        url: `${Constants.API_URL}/users/signup`,
+        url: `${Constants.API_URL}/api/users`,
         data: req
     });
 }

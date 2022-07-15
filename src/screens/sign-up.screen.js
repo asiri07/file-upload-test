@@ -1,48 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { useHistory, Link } from "react-router-dom";
-// import { postSignUp, checkEmailUnique } from '../services';
+import { postSignUp } from '../services';
 
 const SignUp = () => {
-
     const [email, setEmail] = useState("");
     const [emailError, setEmailError] = useState("");
     const history = useHistory();
-
-    const onBlurEmail = (e) => {
-        // let email = e.target.value;
-        // if (email !== "") {
-        //     checkEmailUnique(email).then((response) => {
-        //         if (response.data.isValueUnique) {
-        //             setEmailError("");
-        //         } else {
-        //             setEmailError("Entered email already exists.");
-        //         }
-        //     }).catch((error) => {
-        //         console.log(error);
-        //         setEmailError("Oops, something went wrong.");
-        //     });
-        // }
-    }
-
     const onFinish = (values) => {
-        // let req = {
-        //     "name": values.name,
-        //     "email": values.email,
-        //     "password": values.password,
-        //     "status": "Active"
-        // }
-        // if (emailError === "") {
-        //     postSignUp(req).then((response) => {
-        //         if (response.status === 201) {
-        //             message.success('You have successfully signed up.');
-        //             history.push('/signin');
-        //         }
-        //     }).catch((error) => {
-        //         console.log('error:', error);
-        //         message.error('Oops, error occured while loggin in. Please try again');
-        //     });
-        // }
+        let req = {
+            "name": values.name,
+            "email": values.email,
+            "password": values.password
+        }
+            postSignUp(req).then((response) => {
+                if (response.status === 200) {
+                    message.success('You have successfully signed up.');
+                    history.push('/');
+                }
+            }).catch((error) => {
+                console.log('error:', error);
+                message.error('Oops, error occured while loggin in. Please try again');
+            });
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -100,7 +79,6 @@ const SignUp = () => {
                                     placeholder="Enter your email"
                                     className="login__input"
                                     onChange={(e) => setEmail(e.target.value)}
-                                    onBlur={onBlurEmail}
                                 />
                             </Form.Item>
                             <small className="error__text">{emailError}</small>

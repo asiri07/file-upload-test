@@ -8,32 +8,30 @@ const SignIn = () => {
   const history = useHistory();
 
   const onFinish = (values) => {
-    // let req = {
-    //   "email": values.email,
-    //   "password": values.password
-    // }
+    let req = {
+      "email": values.email,
+      "password": values.password
+    }
 
-    // postSignIn(req).then((response) => {
-    //   console.log(response.data);
-    //   if (response.status === 200) {
-    //     localStorage.setItem('accessToken', response.data.accessToken);
-    //     localStorage.setItem('expireTime', response.data.expireTime);
-    //     localStorage.setItem('refreshToken', response.data.response.refreshToken);
-    //     localStorage.setItem('authenticated', true);
-    //     history.push('/dashboard');
-    //   }
-    // }).catch((error) => {
-    //   if (error.response.status === 401) {
-    //     message.error('Username or password is incorrect.');
-    //   } else {
-    //     message.error('Oops, error occured while loggin in. Please try again');
-    //   }
-    // });
+    postSignIn(req).then((response) => {
+      console.log(response.data);
+      if (response.status === 200) {
+        localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('refreshToken', response.data.refreshToken);
+        history.push('/dashboard');
+      }
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        message.error('Username or password is incorrect.');
+      } else {
+        message.error('Oops, error occured while loggin in. Please try again');
+      }
+    });
   };
 
   const onFinishFailed = (errorInfo) => {
-    // console.log('Failed:', errorInfo);
-    // message.error('Oops, error occured while loggin in. Please try again');
+    console.log('Failed:', errorInfo);
+     message.error('Oops, error occured while loggin in. Please try again');
   };
 
   return (
